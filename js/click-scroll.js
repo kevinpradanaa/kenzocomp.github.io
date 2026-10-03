@@ -1,37 +1,57 @@
 //jquery-click-scroll
 //by syamsul'isul' Arifin
+//updated: safe handling for missing sections + responsive nav offset
 
-var sectionArray = [1, 2, 3, 4, 5];
+(function ($) {
+  "use strict";
 
-$.each(sectionArray, function(index, value){
-          
-     $(document).scroll(function(){
-         var offsetSection = $('#' + 'section_' + value).offset().top - 88;
-         var docScroll = $(document).scrollTop();
-         var docScroll1 = docScroll + 1;
-         
-        
-         if ( docScroll1 >= offsetSection ){
-             $('.navbar-nav .nav-item .nav-link').removeClass('active');
-             $('.navbar-nav .nav-item .nav-link:link').addClass('inactive');  
-             $('.navbar-nav .nav-item .nav-link').eq(index).addClass('active');
-             $('.navbar-nav .nav-item .nav-link').eq(index).removeClass('inactive');
-         }
-         
-     });
-    
-    $('.click-scroll').eq(index).click(function(e){
-        var offsetClick = $('#' + 'section_' + value).offset().top - 88;
-        e.preventDefault();
-        $('html, body').animate({
-            'scrollTop':offsetClick
-        }, 300)
+  var SECTION_IDS = ["section_1", "section_2", "section_3", "section_4", "section_5"];
+
+  function navOffset() {
+    var $nav = $(".navbar");
+    return $nav.length ? $nav.outerHeight() : 0;
+  }
+
+  function sectionTop(id) {
+    var $section = $("#" + id);
+    return $section.length ? $section.offset().top : null;
+  }
+
+  function setActive(index) {
+    var $links = $(".navbar-nav .nav-item .nav-link");
+    $links.removeClass("active");
+    $links.eq(index).addClass("active");
+  }
+
+  function updateActiveSection() {
+    var scrollTop = $(document).scrollTop() + navOffset() + 1;
+    var activeIndex = 0;
+
+    $.each(SECTION_IDS, function (index, id) {
+      var top = sectionTop(id);
+      if (top !== null && scrollTop >= top) {
+        activeIndex = index;
+      }
     });
-    
-});
 
-$(document).ready(function(){
-    $('.navbar-nav .nav-item .nav-link:link').addClass('inactive');    
-    $('.navbar-nav .nav-item .nav-link').eq(0).addClass('active');
-    $('.navbar-nav .nav-item .nav-link:link').eq(0).removeClass('inactive');
-});
+    setActive(activeIndex);
+  }
+
+  $(document).on("scroll", updateActiveSection);
+
+  $(".click-scroll").on("click", function (event) {
+    var target = $(this).attr("href");
+    var top = target ? sectionTop(target.replace("#", "")) : null;
+
+    if (top === null) {
+      return;
+    }
+
+    event.preventDefault();
+    $("html, body").animate({ scrollTop: top - navOffset() + 1 }, 400);
+  });
+
+  $(function () {
+    updateActiveSection();
+  });
+})(window.jQuery);
