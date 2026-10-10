@@ -1,40 +1,69 @@
-COMPANY PROFILE 
+# KenzoComp
 
-This project includes a Node.js server script and a web page that connects to it. The front-end page presents a form the visitor can use to submit a color name, sending the submitted value to the back-end API running on the server. The server returns info to the page that allows it to update the display with the chosen color. 🎨
+Situs company profile statis untuk KenzoComp, partner IT lokal berbasis di
+Sidoarjo yang melayani Sidoarjo dan Surabaya. Situs ini tetap bisa disajikan
+langsung dari GitHub Pages, Apache, atau Laragon: tidak memerlukan Node server,
+build step, framework runtime, atau dependensi instalasi.
 
-Node.js is a popular runtime that lets you run server-side JavaScript. This project uses the Fastify framework and explores basic templating with Handlebars.
+## Struktur
 
-Last updated: 14 August 2023
+```text
+index.html                     Beranda dan slider preview interaktif
+layanan/
+  konsultasi/index.html        ERP, custom software, web dan mobile
+  thinkpad/index.html          Katalog ThinkPad dan filter
+  service/index.html           Detail service dan formulir booking
+portfolio/index.html           Portfolio dan filter kategori
+tentang/index.html             Profil, visi, dan prinsip layanan
+kontak/index.html              Form konsultasi dan peta area Sidoarjo
+css/kenzocomp-modern.css       Token, komponen, dan breakpoint responsif
+js/kenzocomp.js                Slider, menu, filter, dan form WhatsApp
+data/products.json             Data referensi ThinkPad
+data/portfolio.json            Ilustrasi kategori solusi
+data/testimonials.json         Struktur testimoni dengan persetujuan
+sitemap.xml                    Sitemap situs
+robots.txt                     Petunjuk crawler
+tests/site.test.js              Pemeriksaan konten dan kontrak data
+```
 
-Prerequisites
-You'll get best use out of this project if you're familiar with basic JavaScript. If you've written JavaScript for client-side web pages this is a little different because it uses server-side JS, but the syntax is the same!
+CSS memakai token native, bukan Tailwind. Pilihan ini mempertahankan penyajian
+statis yang sudah digunakan situs dan menghindari langkah build baru. Bootstrap
+Icons yang sudah tersedia di project digunakan untuk ikon. Tidak ada framework
+UI atau animasi eksternal yang wajib dimuat.
 
-What's in this project?
-← README.md: That’s this file, where you can tell people what your cool website does and how you built it.
+## Menjalankan lokal
 
-← public/style.css: The styling rules for the pages in your site.
+Buka `index.html` lewat local web server (misalnya Apache/Laragon atau VS Code
+Live Server). Katalog dan portfolio dimuat dengan `fetch`, jadi pembukaan
+halaman memakai skema `file://` tidak didukung.
 
-← server.js: The Node.js server script for your new site. The JavaScript defines the endpoints in the site back-end, one to return the homepage and one to update with the submitted color. Each one sends data to a Handlebars template which builds these parameter values into the web page the visitor sees.
+Semua CTA WhatsApp saat ini menggunakan nomor publik yang telah tercantum di
+situs sebelumnya. Ubah nomor pada `js/kenzocomp.js` (`whatsappNumber`) dan pada
+tautan WhatsApp di HTML secara konsisten bila nomor resmi berbeda.
 
-← package.json: The NPM packages for your project's dependencies.
+## Memperbarui konten
 
-← src/: This folder holds the site template along with some basic data files.
+- **Produk:** edit `data/products.json`. Field `category` menerima `ringan`,
+  `performa`, atau `hemat`. `price` bersifat opsional; rentang harga hanya
+  memfilter unit yang benar-benar memiliki `price` numerik. Ketersediaan,
+  kondisi, garansi, harga, dan spesifikasi harus dikonfirmasi per unit.
+- **Portfolio:** edit `data/portfolio.json`. Visual dan deskripsi yang saat ini
+  disediakan adalah ilustrasi jenis solusi, bukan klaim pekerjaan klien.
+- **Testimoni:** edit `data/testimonials.json`; hanya entri dengan
+  `"approved": true` dan `"isSample": false` ditampilkan. Ganti contoh dan
+  dapatkan izin pelanggan sebelum menerbitkan kutipan atau identitas.
+- **Informasi bisnis:** verifikasi kontak, jam operasional, area layanan, rating,
+  dan klaim lainnya sebelum publikasi. Form kontak membuka WhatsApp dan tidak
+  mengirim atau menyimpan data ke server.
 
-← src/pages/index.hbs: This is the main page template for your site. The template receives parameters from the server script, which it includes in the page HTML. The page sends the user submitted color value in the body of a request, or as a query parameter to choose a random color.
+## Verifikasi
 
-← src/colors.json: A collection of CSS color names. We use this in the server script to pick a random color, and to match searches against color names.
+Jalankan pemeriksaan konten/data menggunakan Node.js 18 atau lebih baru:
 
-← src/seo.json: When you're ready to share your new site or add a custom domain, change SEO/meta settings in here.
+```powershell
+node --test
+node --check js\kenzocomp.js
+git diff --check
+```
 
-Try this next 🏗️
-Take a look in TODO.md for next steps you can try out in your new site!
-
-Want a minimal version of this project to build your own Node.js app? Check out Blank Node!
-
-Glitch
-
-You built this with Glitch!
-Glitch is a friendly community where millions of people come together to build web apps and websites.
-
-Need more help? Check out our Help Center for answers to any common questions.
-Ready to make it official? Become a paid Glitch member to boost your app with private sharing, more storage and memory, domains and more.
+Pemeriksaan responsif manual disarankan pada lebar 320, 768, 1024, dan 1440 px.

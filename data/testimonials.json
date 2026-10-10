@@ -1,0 +1,37 @@
+[
+  {
+    "quote": "Contoh narasi: proses konsultasi terasa jelas karena kebutuhan dibahas sebelum solusi ditawarkan.",
+    "author": "Nama pelanggan (ganti sebelum tayang)",
+    "context": "Konsultasi aplikasi",
+    "approved": false,
+    "isSample": true
+  },
+  {
+    "quote": "Contoh narasi: pilihan perangkat dijelaskan dengan terbuka, termasuk kondisi dan garansinya.",
+    "author": "Nama pelanggan (ganti sebelum tayang)",
+    "context": "Pembelian ThinkPad",
+    "approved": false,
+    "isSample": true
+  },
+  {
+    "quote": "Contoh narasi: kami mendapat penjelasan diagnosis dan estimasi sebelum perbaikan dilakukan.",
+    "author": "Nama pelanggan (ganti sebelum tayang)",
+    "context": "Service laptop",
+    "approved": false,
+    "isSample": true
+  },
+  {
+    "quote": "Contoh narasi: komunikasi selama pengerjaan membantu tim memahami progres dan langkah berikutnya.",
+    "author": "Nama pelanggan (ganti sebelum tayang)",
+    "context": "Pengembangan software",
+    "approved": false,
+    "isSample": true
+  },
+  {
+    "quote": "Contoh narasi: dukungan setelah solusi digunakan membuat pertanyaan lanjutan lebih mudah ditangani.",
+    "author": "Nama pelanggan (ganti sebelum tayang)",
+    "context": "Pendampingan pasca implementasi",
+    "approved": false,
+    "isSample": true
+  }
+]

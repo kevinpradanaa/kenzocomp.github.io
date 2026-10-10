@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Portal informasi dan layanan",
+    "category": "Web",
+    "description": "Contoh website yang merapikan informasi layanan dan memudahkan calon pelanggan menghubungi tim.",
+    "visual": "web"
+  },
+  {
+    "title": "Aplikasi operasional mobile",
+    "category": "Mobile",
+    "description": "Contoh alur mobile untuk membantu tim mencatat aktivitas dan memantau pekerjaan dari lapangan.",
+    "visual": "mobile"
+  },
+  {
+    "title": "Dashboard persediaan terintegrasi",
+    "category": "ERP",
+    "description": "Contoh dashboard untuk melihat stok, transaksi, dan ringkasan operasional dalam satu alur.",
+    "visual": "erp"
+  },
+  {
+    "title": "Sistem pemesanan digital",
+    "category": "Web",
+    "description": "Contoh pengalaman pemesanan yang menyatukan katalog, informasi produk, dan tindak lanjut.",
+    "visual": "retail"
+  },
+  {
+    "title": "Aplikasi pencatatan kunjungan",
+    "category": "Mobile",
+    "description": "Contoh formulir mobile untuk dokumentasi aktivitas serta status tindak lanjut tim.",
+    "visual": "warehouse"
+  },
+  {
+    "title": "Alur pembelian dan stok",
+    "category": "ERP",
+    "description": "Contoh proses pembelian dengan catatan pemasok, status penerimaan, dan perubahan stok.",
+    "visual": "erp"
+  }
+]

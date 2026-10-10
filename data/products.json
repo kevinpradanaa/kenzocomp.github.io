@@ -1,0 +1,62 @@
+[
+  {
+    "model": "ThinkPad X1 Carbon",
+    "category": "ringan",
+    "description": "Ultraringan untuk profesional yang sering berpindah tempat.",
+    "specs": ["Core i5", "RAM 8 GB", "SSD 256 GB"],
+    "condition": "Bekas terkurasi",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=720&q=80"
+  },
+  {
+    "model": "ThinkPad T14",
+    "category": "performa",
+    "description": "Pilihan seimbang untuk pekerjaan kantor dan multitasking.",
+    "specs": ["Core i5", "RAM 16 GB", "SSD 512 GB"],
+    "condition": "Baru & bekas",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=720&q=80"
+  },
+  {
+    "model": "ThinkPad X270",
+    "category": "hemat",
+    "description": "Laptop ringkas untuk kebutuhan kerja harian yang praktis.",
+    "specs": ["Core i5", "RAM 8 GB", "SSD 256 GB"],
+    "condition": "Bekas terkurasi",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=720&q=80"
+  },
+  {
+    "model": "ThinkPad T480",
+    "category": "hemat",
+    "description": "Perangkat kerja dengan konektivitas lengkap dan nyaman digunakan.",
+    "specs": ["Core i5", "RAM 8 GB", "SSD 256 GB"],
+    "condition": "Bekas terkurasi",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=720&q=80"
+  },
+  {
+    "model": "ThinkPad X1 Yoga",
+    "category": "ringan",
+    "description": "Fleksibel untuk presentasi, catatan, dan mobilitas kerja.",
+    "specs": ["Core i7", "RAM 16 GB", "SSD 512 GB"],
+    "condition": "Bekas terkurasi",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=720&q=80"
+  },
+  {
+    "model": "ThinkPad E14",
+    "category": "performa",
+    "description": "Opsi produktif untuk operasional bisnis sehari-hari.",
+    "specs": ["Core i5", "RAM 16 GB", "SSD 512 GB"],
+    "condition": "Baru & bekas",
+    "warranty": "Garansi sesuai unit",
+    "availability": "Konfirmasi stok",
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=720&q=80"
+  }
+]
