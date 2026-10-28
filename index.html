@@ -6,6 +6,7 @@
   <title>KenzoComp — Partner IT untuk Bisnis yang Terus Tumbuh</title>
   <meta name="description" content="Konsultasi aplikasi, jual beli ThinkPad, dan service laptop di Sidoarjo dan Surabaya. KenzoComp mendampingi kebutuhan teknologi bisnis Anda dari awal hingga sesudah implementasi.">
   <meta name="theme-color" content="#10233f">
+  <script>try{var theme=localStorage.getItem("kenzocomp-theme");document.documentElement.dataset.theme=theme==="dark"||theme==="light"?theme:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");}catch(error){document.documentElement.dataset.theme="light";}</script>
   <link rel="canonical" href="https://kenzocomp.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="KenzoComp">
@@ -245,6 +246,7 @@
           <button type="button" class="filter-button" aria-pressed="false" data-product-filter="performa">Produktivitas</button>
           <button type="button" class="filter-button" aria-pressed="false" data-product-filter="hemat">Pilihan hemat</button>
         </div>
+        <label class="product-search"><i class="bi bi-search" aria-hidden="true"></i><span>Cari model atau spesifikasi ThinkPad</span><input type="search" data-product-search placeholder="Cari model atau spesifikasi…" autocomplete="off"></label>
         <div class="product-grid" data-products aria-live="polite">
           <p class="loading-message">Menyiapkan pilihan laptop…</p>
         </div>

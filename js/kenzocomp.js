@@ -26,6 +26,65 @@
     container.replaceChildren(createElement("p", "error-message", message));
   }
 
+  function setupTheme() {
+    var nav = document.querySelector(".primary-nav");
+    if (!nav) return;
+
+    var savedTheme;
+    try {
+      savedTheme = localStorage.getItem("kenzocomp-theme");
+    } catch (error) {
+      savedTheme = null;
+    }
+    if (savedTheme !== "light" && savedTheme !== "dark") savedTheme = null;
+    var systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var theme = savedTheme === "light" || savedTheme === "dark"
+      ? savedTheme
+      : (systemPrefersDark ? "dark" : "light");
+    var toggle = createElement("button", "theme-toggle");
+    toggle.type = "button";
+    toggle.setAttribute("data-theme-toggle", "");
+    var icon = createElement("i", "bi", "");
+    icon.setAttribute("aria-hidden", "true");
+    var label = createElement("span", "", "");
+    toggle.append(icon, label);
+
+    function applyTheme(nextTheme, save) {
+      var isDark = nextTheme === "dark";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      toggle.setAttribute("aria-pressed", String(isDark));
+      toggle.setAttribute("aria-label", isDark ? "Aktifkan mode terang" : "Aktifkan mode gelap");
+      icon.className = "bi " + (isDark ? "bi-sun" : "bi-moon-stars");
+      label.textContent = isDark ? "Mode terang" : "Mode gelap";
+      var themeColor = document.querySelector('meta[name="theme-color"]');
+      if (themeColor) themeColor.content = isDark ? "#0b1d30" : "#102b46";
+      if (save) {
+        savedTheme = nextTheme;
+        try {
+          localStorage.setItem("kenzocomp-theme", nextTheme);
+        } catch (error) {
+          // Theme switching still works for this page when storage is unavailable.
+        }
+      }
+    }
+
+    toggle.addEventListener("click", function () {
+      applyTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark", true);
+    });
+    nav.insertBefore(toggle, nav.querySelector(".nav-cta"));
+    applyTheme(theme, false);
+
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (event) {
+      if (!savedTheme) applyTheme(event.matches ? "dark" : "light", false);
+    });
+    window.addEventListener("storage", function (event) {
+      if (event.key === "kenzocomp-theme" && (event.newValue === "dark" || event.newValue === "light")) {
+        savedTheme = event.newValue;
+        applyTheme(savedTheme, false);
+      }
+    });
+  }
+
   function setupMenu() {
     var toggle = document.querySelector(".menu-toggle");
     var nav = document.querySelector(".primary-nav");
@@ -39,7 +98,7 @@
     });
 
     nav.addEventListener("click", function (event) {
-      if (event.target.closest("a")) {
+      if (event.target.closest("a, [data-theme-toggle]")) {
         nav.classList.remove("is-open");
         toggle.setAttribute("aria-expanded", "false");
         toggle.setAttribute("aria-label", "Buka navigasi");
@@ -204,6 +263,7 @@
     var activeModel = "all";
     var activeCondition = "all";
     var activePrice = "all";
+    var activeSearch = "";
     var productData = [];
 
     function matchesPrice(product) {
@@ -219,11 +279,14 @@
       var visibleProducts = productData.filter(function (product) {
         var modelMatches = activeModel === "all" || product.model.toLowerCase().indexOf(activeModel) !== -1;
         var conditionMatches = activeCondition === "all" || product.condition.toLowerCase().indexOf(activeCondition) !== -1;
+        var searchableText = [product.model, product.description, product.condition, product.warranty].concat(product.specs).join(" ").toLowerCase();
         return (activeFilter === "all" || product.category === activeFilter) &&
-          modelMatches && conditionMatches && matchesPrice(product);
+          modelMatches && conditionMatches && matchesPrice(product) && searchableText.indexOf(activeSearch) !== -1;
       });
       if (!visibleProducts.length) {
-        var emptyMessage = activePrice !== "all"
+        var emptyMessage = activeSearch
+          ? "Tidak ditemukan ThinkPad yang cocok. Coba kata kunci model atau spesifikasi lain."
+          : activePrice !== "all"
           ? "Harga unit belum dicantumkan untuk filter ini. Tanyakan harga terbaru melalui WhatsApp."
           : "Belum ada unit pada filter ini. Hubungi kami untuk pilihan lainnya.";
         container.appendChild(createElement("p", "loading-message", emptyMessage));
@@ -275,6 +338,13 @@
           filterButton.classList.toggle("is-active", selected);
           filterButton.setAttribute("aria-pressed", String(selected));
         });
+        renderProducts();
+      });
+    });
+
+    document.querySelectorAll("[data-product-search]").forEach(function (input) {
+      input.addEventListener("input", function () {
+        activeSearch = input.value.trim().toLowerCase();
         renderProducts();
       });
     });
@@ -448,6 +518,7 @@
     });
   }
 
+  setupTheme();
   setupMenu();
   setupHeroSlider();
   setupProducts();
